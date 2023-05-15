@@ -36,11 +36,8 @@ class SubHijacker:
         for domain in domains:
             domain = domain.split()[1].replace("\n", "")
             answer = dns.resolver.resolve(domain, "Cname")
-            try:
-                for data in answer:
-                    print(f"[-] {domain} --> {data}")
-            except:
-                continue
+            for data in answer:
+                print(f"[-] {domain} --> {data}")
 
     def removeAllFiles(self):
         if os.path.exists(self.takeoverFileName):
