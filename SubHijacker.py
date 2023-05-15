@@ -13,7 +13,7 @@ class SubHijacker:
         p.communicate()
 
     def getAllDomainsFromFile(self):
-        if not os.path.exists(self.takeoverFileName):
+        if not os.path.exists(self.foundSubsFileName):
             return []
 
         with open(self.foundSubsFileName, "r") as f:
@@ -33,15 +33,14 @@ class SubHijacker:
 
     def showCnameForDomains(self, domains):
 
-
-            for domain in domains:
-                domain = domain.split()[1]
-                answer = dns.resolver.resolve(domain, "Cname")
-                try:
-                    for data in answer:
-                        print(f"[-] {domain} --> {data}")
-                except:
-                    continue
+        for domain in domains:
+            domain = domain.split()[1]
+            answer = dns.resolver.resolve(domain, "Cname")
+            try:
+                for data in answer:
+                    print(f"[-] {domain} --> {data}")
+            except:
+                continue
 
     def removeAllFiles(self):
         if os.path.exists(self.takeoverFileName):
@@ -69,6 +68,7 @@ class SubHijacker:
         takeoverDomains = self.getAllVulnerable()
 
         if not takeoverDomains:
+            print("[!] None found")
             self.removeAllFiles()
             return
 
