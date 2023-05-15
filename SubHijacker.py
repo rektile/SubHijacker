@@ -34,7 +34,7 @@ class SubHijacker:
     def showCnameForDomains(self, domains):
 
         for domain in domains:
-            domain = domain.split()[1]
+            domain = domain.split()[1].replace("\n", "")
             answer = dns.resolver.resolve(domain, "Cname")
             try:
                 for data in answer:
